@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>五星好评</title>
+</head>
+<body bgcolor="#aaa">
+	<img src="img/star.png" width="50px" height="50px">
+	<img src="img/star.png" width="50px" height="50px">
+	<img src="img/star.png" width="50px" height="50px">
+	<img src="img/star.png" width="50px" height="50px">
+	<img src="img/star.png" width="50px" height="50px"> 
+	<span style="font-size: 50px;"></span>
+<script>
+	var img=document.getElementsByTagName('img');
+	var span=document.getElementsByTagName('span');
+	var index,flag=false;
+	var pingyu={
+		"0":'极差',
+		"1":'较差',
+		"2":'一般',
+		"3":'很好',
+		'4':'非常好'
+	}
+	img=[].slice.call(img);
+	img.forEach(function(n){
+		n.onmouseover=function(e){
+			if(flag==false){
+				for(var i=0;i<img.length;i++){
+					if(e.target===img[i]){index=i;}
+				}
+				for(var j=0;j<index+1;j++){
+					img[j].src="img/star2.png";
+				}
+				span[0].innerHTML=pingyu[index];
+			}
+		}
+		n.onmouseout=function(e){
+			if(flag==false){
+				for(var j=0;j<img.length;j++){
+					img[j].src="img/star.png";
+				}
+				span[0].innerHTML='';
+			}
+		}
+		n.onclick=function(e){
+			if(flag==true){
+				alert('你已经评过分了！');
+				return;
+			}else{
+				flag=true;
+				for(var j=0;j<index+1;j++){
+					img[j].src="img/star2.png";
+				}
+				span[0].innerHTML=pingyu[index];
+			}
+		}
+	})
+</script>
+</body>
+</html>
